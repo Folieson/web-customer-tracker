@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="myDataSource" uuid="16205049-65cc-45c8-8fcc-0d25f85815cf">
+    <data-source source="LOCAL" name="persistence-mysql" uuid="3c8c4d80-88a6-41c5-936f-42fafc9289f1">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
-      <remarks>c3p0
+      <remarks>jdbc.properties
 
-/Users/andrey/Developer/IdeaProjects/SpringAndHibernateCourse/web-customer-tracker/src/main/webapp/WEB-INF/spring-mvc-servlet.xml</remarks>
+/Users/andrejponamarcuk/Library/Mobile Documents/com~apple~CloudDocs/Developer/Java/IdeaProjects/SpringAndHibernateCourse/web-customer-tracker/src/main/resources/persistence-mysql.properties</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/web_customer_tracker</jdbc-url>
+      <jdbc-url>jdbc:mysql://webcustomertrackerdb.cbqvrz4zg8wa.eu-central-1.rds.amazonaws.com:3306/web_customer_tracker</jdbc-url>
     </data-source>
   </component>
 </project>

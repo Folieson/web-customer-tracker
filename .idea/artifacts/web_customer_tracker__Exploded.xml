@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="web-customer-tracker: Exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/web_customer_tracker__Exploded</output-path>
+    <root id="root" />
+  </artifact>
+</component>
