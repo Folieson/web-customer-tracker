@@ -3,10 +3,7 @@ package com.folies.springdemo.config;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -27,6 +24,7 @@ import java.util.logging.Logger;
 @EnableTransactionManagement
 @ComponentScan("com.folies.springdemo")
 @PropertySource({"classpath:persistence-mysql.properties"})
+@EnableAspectJAutoProxy
 public class AppConfig implements WebMvcConfigurer {
     private final Environment env;
 
