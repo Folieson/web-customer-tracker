@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("com.folies.springdemo")
-@PropertySource({"classpath:persistence-mysql.properties"})
+@PropertySource({"classpath:persistence-mysql.properties", "classpath:security-persistence-mysql.properties"})
 @EnableAspectJAutoProxy
 public class AppConfig implements WebMvcConfigurer {
     private final Environment env;
@@ -79,6 +79,42 @@ public class AppConfig implements WebMvcConfigurer {
         return myDataSource;
     }
 
+    // define a bean for our security datasource
+
+    @Bean
+    public DataSource securityDataSource() {
+
+        // create connection pool
+        ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
+
+        // set the jdbc driver class
+        try {
+            securityDataSource.setDriverClass(env.getProperty("security.jdbc.driver"));
+        } catch (PropertyVetoException exc) {
+            throw new RuntimeException(exc);
+        }
+
+        // log the connection props
+        // for sanity's sake, log this info
+        // just to make sure we are REALLY reading data from properties file
+        logger.info(">>> security.jdbc.url=" + env.getProperty("security.jdbc.url"));
+        logger.info(">>> security.jdbc.user=" + env.getProperty("security.jdbc.user"));
+
+
+        // set database connection props
+        securityDataSource.setJdbcUrl(env.getProperty("security.jdbc.url"));
+        securityDataSource.setUser(env.getProperty("security.jdbc.user"));
+        securityDataSource.setPassword(env.getProperty("security.jdbc.password"));
+
+        // set connection pool props
+        securityDataSource.setInitialPoolSize(getIntProperty("security.connection.pool.initialPoolSize"));
+        securityDataSource.setMinPoolSize(getIntProperty("security.connection.pool.minPoolSize"));
+        securityDataSource.setMaxPoolSize(getIntProperty("security.connection.pool.maxPoolSize"));
+        securityDataSource.setMaxIdleTime(getIntProperty("security.connection.pool.maxIdleTime"));
+
+        return securityDataSource;
+    }
+
     private Properties getHibernateProperties() {
 
         // set hibernate properties
@@ -93,13 +129,11 @@ public class AppConfig implements WebMvcConfigurer {
 
     // need a helper method
     // read environment property and convert to int
-
     private int getIntProperty(String propName) {
 
         String propVal = env.getProperty(propName);
 
         // now convert to int
-
         assert propVal != null;
         return Integer.parseInt(propVal);
     }
